@@ -1,103 +1,98 @@
-import React, { useEffect } from "react";
-import { useDarkMode } from "../DarkModeContext";
+import React, { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { faqs } from "../Components/export";
 import faqimg1 from "../assets/images/faq1.jpg";
 import faqimg2 from "../assets/images/faq2.jpg";
 import faqimg3 from "../assets/images/faq3.jpg";
 import faqimg4 from "../assets/images/faq4.jpg";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { Accordion } from "flowbite-react";
+import { FaPlus, FaMinus } from "react-icons/fa6";
+
+const faqImages = [faqimg1, faqimg2, faqimg3, faqimg4];
+
+const FaqItem = ({ q, a, isOpen, toggle }) => (
+  <div
+    className={`border rounded-2xl overflow-hidden transition-colors ${
+      isOpen ? "border-flame-500/40 bg-white/[0.05]" : "border-white/[0.07] bg-transparent"
+    }`}
+  >
+    <button
+      onClick={toggle}
+      className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+    >
+      <span className="text-white font-semibold text-sm leading-snug font-body">{q}</span>
+      <span
+        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white transition-colors ${
+          isOpen ? "bg-flame-500" : "bg-white/10"
+        }`}
+      >
+        {isOpen ? <FaMinus size={12} /> : <FaPlus size={12} />}
+      </span>
+    </button>
+    <div className={`faq-answer px-6 ${isOpen ? "open pb-5" : ""}`}>
+      <p className="text-white/55 text-sm leading-relaxed font-body">{a}</p>
+    </div>
+  </div>
+);
 
 const Faq = () => {
+  const [openIdx, setOpenIdx] = useState(0);
+
   useEffect(() => {
-    AOS.init({
-      offset: 200,
-      duration: 800,
-      easing: "ease-in-sine",
-      delay: 100,
-    });
+    AOS.init({ offset: 100, duration: 900, easing: "ease-out-cubic", once: true });
   }, []);
 
-  const { darkMode, toggleDarkMode } = useDarkMode();
   return (
-    <section
-      id="faq"
-      className={`${
-        darkMode ? "dark bg-black" : "light bg-white"
-      } w-full lg:px-20 px-10 lg:py-20 py-10 grid lg:grids lg:grid-cols-2 grid-cols-1 justify-center items-start gap-14`}
-    >
-      <div
-        id="left"
-        className="flex flex col justify-center items-center gap-12"
-      >
-        <h1
-          data-aos="zoom-in"
-          className="text-6x1 text-black font-bold text-center dark:text-white"
-        >
-          Frequently Asked Questions
-        </h1>
-        <div data-aos="slide-up" className="w-full">
-          <Accordion className="flex flex-col justify-center items-center gap-2">
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">What are your opening hours?</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                We're open seven days a week! Our operating hours are from 11:00 AM to 10:00 PM, Monday through Sunday.
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">Do you offer delivery services</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Yes, we provide delivery within a 5-mile radius. There's a ₹30 delivery fee, and orders over ₹300 qualify for free delivery.
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">Can I place an order online?</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                We accept all major credit cards, cash upon delivery, and popular online payment platforms like PayPal.
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">Do you have gluten-free or vegan pizza options</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Yes, we offer both gluten-free crust and vegan cheese options. You can customize your pizza to suit your dietary preferences.
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">How can I customize my pizza?</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                You can fully customize your pizza by choosing from a variety of crusts, sauces, cheeses, and toppings. Create the perfect pizza for your taste!
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-            <Accordion.Panel>
-              <Accordion.Title className="border-none text-black text-lg">Are there any current promotions or discounts?</Accordion.Title>
-              <Accordion.Content>
-                <p className="mb-2 text-gray-500 dark:text-gray-400">
-                Check out our "Specials" page on the website for the latest promotions and discounts. We also have exclusive deals for our newsletter subscribers.
-                </p>
-              </Accordion.Content>
-            </Accordion.Panel>
-          </Accordion>
+    <section id="faq" className="bg-[#080400] py-24 px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+        {/* Left */}
+        <div className="space-y-6" data-aos="fade-right">
+          <div>
+            <p className="text-flame-500 font-bold tracking-widest text-xs uppercase mb-3">
+              FAQ
+            </p>
+            <h2 className="font-display font-black text-white text-5xl lg:text-6xl leading-tight">
+              Got{" "}
+              <span className="bg-gradient-to-r from-flame-500 to-gold-500 bg-clip-text text-transparent">
+                Questions?
+              </span>
+            </h2>
+          </div>
+          <p className="text-white/50 text-base leading-relaxed">
+            Everything you need to know about PizzaRaj — from our craft to delivery.
+          </p>
+
+          <div className="space-y-3">
+            {faqs.map((item, i) => (
+              <FaqItem
+                key={i}
+                q={item.q}
+                a={item.a}
+                isOpen={openIdx === i}
+                toggle={() => setOpenIdx(openIdx === i ? -1 : i)}
+              />
+            ))}
+          </div>
         </div>
-        {/* <button data-aos="flip-up" className="bg-orange-500 text-lg text-white px-8 py-4 rounded-full font-semibold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black">CONTACT US</button> */}
+
+        {/* Right: image grid */}
+        <div
+          data-aos="fade-left"
+          data-aos-delay="200"
+          className="grid grid-cols-2 gap-4 hidden lg:grid"
+        >
+          {faqImages.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt={`pizza ${i + 1}`}
+              className={`w-full rounded-2xl object-cover shadow-xl ${
+                i % 2 === 0 ? "h-52 mt-4" : "h-52"
+              }`}
+            />
+          ))}
+        </div>
       </div>
-      <div id="image-box" class="grid lg:grid-cols-2 grid-cols-1 justify-center items-center gap-4">
-  <img data-aos="zoom-in" src={faqimg1} alt="" class="w-[240px] h-[240px] rounded-xl shadow-lg" />
-  <img data-aos="zoom-in" src={faqimg2} alt="" class="w-[240px] h-[240px] rounded-xl shadow-lg" />
-  <img data-aos="zoom-in" src={faqimg3} alt="" class="w-[240px] h-[240px] rounded-xl shadow-lg" />
-  <img data-aos="zoom-in" src={faqimg4} alt="" class="w-[240px] h-[240px] rounded-xl shadow-lg" />
-</div>
-
-
     </section>
   );
 };

@@ -1,64 +1,97 @@
-import React, { useEffect } from 'react';
-import icon1 from '../assets/images/icon1.png';
-import icon2 from '../assets/images/icon2.png';
-import icon3 from '../assets/images/icon3.png';
-import icon4 from '../assets/images/icon4.png';
-import about1 from '../assets/images/about1.jpg';
-import { useDarkMode } from '../DarkModeContext';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import about1 from "../assets/images/about1.jpg";
+import about2 from "../assets/images/about2.jpg";
+
+const features = [
+  { icon: "🌾", title: "Farm-Fresh Ingredients", desc: "Sourced daily from local farms across India" },
+  { icon: "🔥", title: "Wood-Fired Ovens",       desc: "900°F bakes for the perfect char every time" },
+  { icon: "⚡", title: "30-Min Guarantee",        desc: "Late? Your next order is 20% off. Promise." },
+  { icon: "🌱", title: "100% Pure Veg Options",   desc: "FSSAI-certified vegan and gluten-free menus" },
+];
 
 const About = () => {
-  const { darkMode, toggleDarkMode } = useDarkMode();
-
   useEffect(() => {
-    AOS.init({
-      offset: 200,
-      duration: 800,
-      easing: 'ease-in-sine',
-      delay: 100,
-    });
+    AOS.init({ offset: 100, duration: 900, easing: "ease-out-cubic", once: true });
   }, []);
 
   return (
-    <>
-      <section
-        id='about'
-        className={`${darkMode ? 'dark bg-black' : 'light bg-white'} w-full lg:px-20 px-10 lg:py-20 py-10 h-fit grid lg:grid-cols-4 grid-cols-1 justify-center items-center gap-10`}
-      >
-    {/* <div data-aos="zoom-in" data-aos-delay="200" className='border-[4px] border-orange-600 dark:border-orange-400 p-14 flex flex-col justify-center items-ccenter gap-6 rounded-x1 hover:bg-orange-100 cursor-pointer'>
-    <img src={icon1} alt="" className='w-[80px] h-[80px] transform hover:scale-105 transition-transform duration-300 cursor-pointer' />
-    <h1 >ABOUT US</h1>
-    </div> */}
-    <div data-aos="zoom-in" data-aos-delay="200" className='border-[4px] border-orange-600 dark:border-orange-400 p-14 flex flex-col justify-center items-center gap-6 rounded-x1 hover:bg-orange-100 cursor-pointer'>
-    <img src={icon1} alt="" className='w-[80px] h-[80px] transform hover:scale-105 transition-transform duration-300 cursor-pointer' />
-    <h1 >ABOUT US</h1>
-    </div>
-    <div data-aos="zoom-in" data-aos-delay="200" className='border-[4px] border-orange-600 dark:border-orange-400 p-14 flex flex-col justify-center items-center gap-6 rounded-x1 hover:bg-orange-100 cursor-pointer'>
-    <img src={icon2} alt="" className='w-[80px] h-[80px] transform hover:scale-105 transition-transform duration-300 cursor-pointer' />
-    <h1 >ORGANIC</h1>
-    </div>
-    <div data-aos="zoom-in" data-aos-delay="200" className='border-[4px] border-orange-600 dark:border-orange-400 p-14 flex flex-col justify-center items-center gap-6 rounded-x1 hover:bg-orange-100 cursor-pointer'>
-    <img src={icon3} alt="" className='w-[80px] h-[80px] transform hover:scale-105 transition-transform duration-300 cursor-pointer' />
-    <h1 >PIZZA</h1>
-    </div>
-    <div data-aos="zoom-in" data-aos-delay="200" className='border-[4px] border-orange-600 dark:border-orange-400 p-14 flex flex-col justify-center items-center gap-6 rounded-x1 hover:bg-orange-100 cursor-pointer'>
-    <img src={icon4} alt="" className='w-[80px] h-[80px] transform hover:scale-105 transition-transform duration-300 cursor-pointer' />
-    <h1 >PASTA</h1>
-    </div>
-      </section>
-      <section className={`${darkMode ? 'dark bg-black' : 'light bg-white'} w-full lg:px-20 px-10 lg:py-20 py-10 h-fit grid lg:grid-cols-2 grid-cols-1 justify-center items-center gap-10`}>
-        <div>
-            <img data-aos="zoom-in" src={about1} alt="about image" className='lg:w-[800px] lg:h-[600px] rounded-x1' />
+    <section id="about" className="bg-[#0D0700] py-24 px-6 lg:px-12 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+        {/* Images */}
+        <div data-aos="fade-right" className="relative hidden lg:block">
+          <img
+            src={about1}
+            alt="Our kitchen"
+            className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
+          />
+          <img
+            src={about2}
+            alt="Fresh ingredients"
+            className="absolute -bottom-8 -right-8 w-52 h-52 object-cover rounded-2xl border-4 border-[#0D0700] shadow-xl"
+          />
+          {/* Experience badge */}
+          <div className="absolute top-6 -left-6 bg-gradient-to-br from-flame-500 to-gold-500 rounded-2xl p-5 shadow-xl text-center">
+            <p className="text-4xl font-black text-white font-display">15+</p>
+            <p className="text-xs text-white/80 font-medium tracking-wide">Years of Craft</p>
+          </div>
         </div>
-        <div className='flex flex-col justify-center items-center gap-8'>
-        <h1 data-aos="zoom-in" className='text-2x1 text-black dark:text-white font-semibold text-center'>WELCOME TO</h1>
-        <h1 data-aos="zoom-in" className='text-6x1 text-black dark:text-white font-bold text-center'>Pizzazz pies</h1>
-        <p data-aos="zoom-in" className='text-x1 text-slate-800 dark:text-slate-100 text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat illo aperiam nemo, vero alias nesciunt! Quas dolor autem tempore amet.</p>
-        <button data-aos="flip-up" className='bg-orange-500 text-lg text-white px-8 py-4 rounded-full font-semibold hover:bg-black hover:text-white dark:hover:bg-white dark:hover-text-black'>ORDER NOW</button>
+
+        {/* Content */}
+        <div className="space-y-8">
+          <div data-aos="fade-left" data-aos-delay="100">
+            <p className="text-flame-500 font-bold tracking-widest text-xs uppercase mb-3">
+              Our Story
+            </p>
+            <h2 className="font-display font-black text-white text-5xl lg:text-6xl leading-tight">
+              Born in India,{" "}
+              <span className="bg-gradient-to-r from-flame-500 to-gold-500 bg-clip-text text-transparent">
+                Loved Worldwide
+              </span>
+            </h2>
+          </div>
+
+          <p data-aos="fade-left" data-aos-delay="200" className="text-white/60 text-lg leading-relaxed font-body">
+            PizzaRaj was born from one obsession: India deserves a pizza that honours its
+            incredible culinary heritage. We take the finest Italian pizza tradition and
+            infuse it with the bold, complex spice profiles that make Indian cooking the
+            most loved cuisine on earth.
+          </p>
+
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+          >
+            {features.map(({ icon, title, desc }) => (
+              <div
+                key={title}
+                className="flex items-start gap-4 bg-white/[0.03] border border-white/[0.06] rounded-2xl p-5 hover:border-flame-500/30 transition-colors group"
+              >
+                <span className="text-3xl flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  {icon}
+                </span>
+                <div>
+                  <p className="text-white font-bold text-sm">{title}</p>
+                  <p className="text-white/50 text-xs mt-1 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="400">
+            <a
+              href="#menu"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-flame-500 to-gold-500 text-white font-bold hover:opacity-90 transition-opacity shadow-lg shadow-flame-500/25"
+            >
+              Explore Our Menu →
+            </a>
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 
