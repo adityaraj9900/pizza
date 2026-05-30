@@ -1,24 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-#product-box{
-  display: flex;
+/* ── Root ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Poppins', sans-serif;
 }
 
-.slick-slide div{
-  margin: 10px;
+body {
+  background-color: #0A0500;
+  color: #fff;
+  overflow-x: hidden;
 }
 
-.slick-arrow:before{
-  color: #ff5a1f;
-  font-size: 50px;
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0500; }
+::-webkit-scrollbar-thumb { background: #E63312; border-radius: 9999px; }
+
+/* ── Slick carousel overrides ── */
+.slick-slide div { margin: 10px; }
+.slick-arrow::before { color: #E63312; font-size: 42px; }
+.slick-prev { left: -44px; }
+.slick-next { right: -30px; }
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.slick-prev{
-  left:-40px;
+/* ── Flame gradient text ── */
+.text-flame-gradient {
+  background: linear-gradient(135deg, #E63312 0%, #F5A623 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.slick-next {
-  right:-30px;
+/* ── Section glow blob ── */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Menu card hover ── */
+.pizza-card:hover .pizza-img {
+  transform: scale(1.08);
+}
+.pizza-img { transition: transform 0.4s ease; }
+
+/* ── Animated underline nav link ── */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E63312, #F5A623);
+  transition: width 0.3s ease;
+  border-radius: 9999px;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ── Header scroll glass ── */
+.header-glass {
+  background: rgba(10, 5, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(230, 51, 18, 0.15);
+}
+
+/* ── Testimonial card shine ── */
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E63312, #F5A623, transparent);
+  border-radius: 12px 12px 0 0;
+}
+
+/* ── FAQ accordion ── */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.faq-answer.open {
+  max-height: 300px;
+}
+
+/* ── Input focus ring ── */
+.input-field:focus {
+  outline: none;
+  border-color: #E63312;
+  box-shadow: 0 0 0 3px rgba(230, 51, 18, 0.2);
+}
+
+/* ── Cart sidebar overlay ── */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 998;
+  animation: fadeIn 0.25s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Badge pill ── */
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
 }
